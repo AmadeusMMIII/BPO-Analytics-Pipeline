@@ -1,0 +1,48 @@
+# ==========================================
+# Environment Variables & Secrets (CRITICAL)
+# ==========================================
+.env
+.env.*
+*.pem
+*.key
+
+# ==========================================
+# Python Virtual Environments & Cache
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# ==========================================
+# dbt Build Artifacts & Sensitive Profiles
+# ==========================================
+dbt_bpo_analytics/target/
+dbt_bpo_analytics/dbt_packages/
+dbt_bpo_analytics/logs/
+profiles.yml
+
+# ==========================================
+# Database & Local Data Storage
+# ==========================================
+*.sqlite3
+*.db
+*.log
+
+# ==========================================
+# Operating System & IDE Files
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ==========================================
+# Tableau Temporary / Extra Files
+# ==========================================
+*.twbx.files/
