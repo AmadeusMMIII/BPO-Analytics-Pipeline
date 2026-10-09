@@ -108,7 +108,7 @@ $$\text{Utilization Rate} = \frac{\sum \text{Total Ticket Handling Time}}{\sum \
 ### 1. Repository Setup
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/BPO-Analytics-Pipeline.git](https://github.com/YOUR_USERNAME/BPO-Analytics-Pipeline.git)
+git clone https://github.com/AmadeusMMIII/BPO-Analytics-Pipeline.git
 cd BPO-Analytics-Pipeline
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
