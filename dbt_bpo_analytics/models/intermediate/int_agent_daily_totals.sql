@@ -5,7 +5,8 @@ with ticket_summary as (
         count(ticket_id) as total_tickets_handled,
         sum(handle_duration_sec) as total_handle_sec,
         avg(handle_duration_sec) as avg_handle_sec,
-        avg(csat_score) as avg_daily_csat,
+        sum(csat_score) as total_daily_csat_score,
+        avg(csat_score) as avg_daily_csat_score,
         count(csat_score) as total_csat_responses
     from {{ ref('int_tickets_joined_csat') }}
     where agent_id is not null
@@ -28,14 +29,14 @@ select
     coalesce(t.total_handle_sec, 0) as total_handle_sec,
     round(coalesce(t.total_handle_sec, 0) / 3600.0, 2) as total_handle_hours,
     round(coalesce(t.avg_handle_sec, 0), 2) as avg_handle_sec,
-    round(t.avg_daily_csat, 2) as avg_daily_csat,
+    coalesce(t.total_daily_csat_score, 0) as total_daily_csat_score,
+    round(t.avg_daily_csat_score, 2) as avg_daily_csat_score,
     coalesce(t.total_csat_responses, 0) as total_csat_responses,
-    -- Utilization % = (Total Handle Hours / Actual Worked Hours) * 100
     case 
         when s.actual_worked_hours > 0 
-        then round(( (coalesce(t.total_handle_sec, 0) / 3600.0) / s.actual_worked_hours ) * 100, 2)
+        then (coalesce(t.total_handle_sec, 0) / 3600.0) / s.actual_worked_hours
         else 0 
-    end as utilization_pct
+    end as utilization_rate
 from shifts s
 left join ticket_summary t 
     on s.agent_id = t.agent_id 

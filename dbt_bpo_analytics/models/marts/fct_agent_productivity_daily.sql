@@ -18,17 +18,19 @@ select
     d.actual_worked_hours,
     d.overtime_hours,
     d.total_tickets_handled,
+    d.total_handle_sec,
     d.total_handle_hours,
     d.avg_handle_sec,
-    d.utilization_pct,
-    d.avg_daily_csat,
+    d.utilization_rate,
+    d.total_daily_csat_score,
+    d.avg_daily_csat_score,
     d.total_csat_responses,
     
     -- Burnout Flag Logic: High Overtime + Utilization > 85% + Low CSAT (< 3.5)
     case 
         when d.overtime_hours >= 1.0 
-         and d.utilization_pct > 85.0 
-         and d.avg_daily_csat < 3.5 
+         and d.utilization_rate > .85 
+         and d.avg_daily_csat_score < 3.5 
         then true 
         else false 
     end as is_burnout_risk

@@ -12,13 +12,10 @@ select
     sum(case when is_abandoned then 1 else 0 end) as total_abandoned_tickets,
     sum(case when is_within_sla then 1 else 0 end) as total_sla_compliant_tickets,
     sum(case when not is_abandoned then 1 else 0 end) as total_handled_tickets,
-    
-    -- Abandonment Rate %
-    round((sum(case when is_abandoned then 1 else 0 end)::numeric / count(ticket_id)) * 100, 2) as abandonment_rate_pct,
-    
-    -- SLA Compliance Rate %
-    round((sum(case when is_within_sla then 1 else 0 end)::numeric / count(ticket_id)) * 100, 2) as sla_compliance_pct,
-    
+    sum(queue_duration_sec) as total_queue_duration_sec,
+    sum(case when not is_abandoned then handle_duration_sec else 0 end) as total_handle_duration_sec,
+    sum(case when is_abandoned then 1 else 0 end)::numeric / count(ticket_id) as abandonment_rate_pct,
+    sum(case when is_within_sla then 1 else 0 end)::numeric / count(ticket_id) as sla_compliance_rate,
     round(avg(queue_duration_sec), 2) as avg_queue_duration_sec,
     round(avg(case when not is_abandoned then handle_duration_sec else null end), 2) as avg_handle_duration_sec
 from ticket_facts

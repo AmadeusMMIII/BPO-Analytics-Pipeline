@@ -11,7 +11,7 @@ An end-to-end, production-grade data engineering and analytics pipeline built to
 *Tracks global ticket volume, SLA compliance, abandonment rates, average wait times, hourly volume heatmaps, and channel performance against operational benchmarks.*
 
 ### 2. Workforce Productivity & Burnout Monitor
-![Workforce Productivity & Burnout Monitor](docs/images/workforce_productivity_burnout.png)
+![Workforce Productivity & Burnout Monitor](docs/images/workforce_productivity_&_burnout_monitor.png)
 *Monitors agent utilization vs. CSAT to flag burnout risks, analyzes shift-level overtime trends, and identifies capacity allocation deficits.*
 
 ---
