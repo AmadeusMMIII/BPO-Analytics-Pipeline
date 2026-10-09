@@ -18,36 +18,7 @@ An end-to-end, production-grade data engineering and analytics pipeline built to
 
 ## System Architecture
 
-```text
-               +-----------------------+
-               |   Raw CSV Datasets    |
-               |      (data/raw/)      |
-               +-----------+-----------+
-                           |
-                           v
-               +-----------------------+
-               |  Python ETL Loader    |  (psycopg / SQLAlchemy COPY Stream)
-               | (scripts/02_load.py)  |
-               +-----------+-----------+
-                           |
-                           v
-               +-----------------------+
-               | PostgreSQL Data Mart  |  (Schema: raw_bpo)
-               |     (bpo_analytics)   |
-               +-----------+-----------+
-                           |
-                           v
-               +-----------------------+
-               |      dbt Core         |  (Data Transformations, UTC/PHT Timezone
-               | (dbt_bpo_analytics)   |   Standardization, Staging & Mart Models)
-               +-----------+-----------+
-                           |
-                           v
-               +-----------------------+
-               |   Tableau Dashboard   |  (Weighted SUM/SUM KPI Aggregations,
-               |   (Visualization)     |   Interactive Filter Actions)
-               +-----------------------+
-```
+![System Architecture](docs/images/system_architecture.png)
 
 ---
 
@@ -68,8 +39,6 @@ $$\text{Abandonment Rate} = \frac{\sum \text{Total Abandoned Tickets}}{\sum \tex
 * **Utilization Rate:**
 
 $$\text{Utilization Rate} = \frac{\sum \text{Total Ticket Handling Time}}{\sum \text{Total Logged Shift Time}}$$
-
-
 
 ---
 
@@ -144,7 +113,7 @@ dbt test
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 ├── data/
@@ -163,4 +132,4 @@ dbt test
 ├── .gitignore
 ├── README.md
 └── requirements.txt
-```"# BPO-Analytics-Pipeline" 
+```
